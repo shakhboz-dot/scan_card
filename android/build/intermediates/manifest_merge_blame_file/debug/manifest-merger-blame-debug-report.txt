@@ -1,0 +1,36 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.nateshmbhat.card_scanner" >
+4
+5    <uses-sdk android:minSdkVersion="21" />
+5-->C:\Users\User\Desktop\scan_card\android\src\main\AndroidManifest.xml
+6
+7    <uses-feature android:name="android.hardware.camera.any" />
+7-->C:\Users\User\Desktop\scan_card\android\src\main\AndroidManifest.xml:5:5-64
+7-->C:\Users\User\Desktop\scan_card\android\src\main\AndroidManifest.xml:5:19-61
+8
+9    <uses-permission android:name="android.permission.CAMERA" />
+9-->C:\Users\User\Desktop\scan_card\android\src\main\AndroidManifest.xml:6:5-65
+9-->C:\Users\User\Desktop\scan_card\android\src\main\AndroidManifest.xml:6:22-62
+10
+11    <application>
+11-->C:\Users\User\Desktop\scan_card\android\src\main\AndroidManifest.xml:8:5-17:19
+12        <meta-data
+12-->C:\Users\User\Desktop\scan_card\android\src\main\AndroidManifest.xml:9:9-11:35
+13            android:name="com.google.mlkit.vision.DEPENDENCIES"
+13-->C:\Users\User\Desktop\scan_card\android\src\main\AndroidManifest.xml:10:13-64
+14            android:value="ocr" />
+14-->C:\Users\User\Desktop\scan_card\android\src\main\AndroidManifest.xml:11:13-32
+15
+16        <activity
+16-->C:\Users\User\Desktop\scan_card\android\src\main\AndroidManifest.xml:12:9-16:20
+17            android:name="com.nateshmbhat.card_scanner.CardScannerCameraActivity"
+17-->C:\Users\User\Desktop\scan_card\android\src\main\AndroidManifest.xml:13:13-54
+18            android:screenOrientation="portrait"
+18-->C:\Users\User\Desktop\scan_card\android\src\main\AndroidManifest.xml:14:13-49
+19            android:theme="@style/Theme.AppCompat" >
+19-->C:\Users\User\Desktop\scan_card\android\src\main\AndroidManifest.xml:15:13-51
+20        </activity>
+21    </application>
+22
+23</manifest>

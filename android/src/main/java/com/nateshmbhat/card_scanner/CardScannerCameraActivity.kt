@@ -6,12 +6,13 @@ import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -20,10 +21,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.TextRecognizer
-import com.nateshmbhat.card_scanner.logger.debugLog
-import com.nateshmbhat.card_scanner.scanner_core.CardScanner
-import com.nateshmbhat.card_scanner.scanner_core.models.CardDetails
-import com.nateshmbhat.card_scanner.scanner_core.models.CardScannerOptions
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions
+
+import com.nateshmbhat.card_scanner.scanner_core.*
+import com.nateshmbhat.card_scanner.scanner_core.models.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -44,10 +45,11 @@ class CardScannerCameraActivity : AppCompatActivity() {
   lateinit var scannerBar: View
   lateinit var backButton: View
 
+  @RequiresApi(Build.VERSION_CODES.TIRAMISU)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.card_scanner_camera_activity)
-    cardScannerOptions = intent.getParcelableExtra<CardScannerOptions>(CARD_SCAN_OPTIONS)
+    cardScannerOptions = intent.getParcelableExtra<CardScannerOptions>(CARD_SCAN_OPTIONS);
 
     scannerLayout = findViewById(R.id.scannerLayout);
     scannerBar = findViewById(R.id.scannerBar);
@@ -107,6 +109,7 @@ class CardScannerCameraActivity : AppCompatActivity() {
   override fun onRequestPermissionsResult(
           requestCode: Int, permissions: Array<String>, grantResults:
           IntArray) {
+    super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     if (requestCode == REQUEST_CODE_PERMISSIONS) {
       if (allPermissionsGranted()) {
         startCamera()
@@ -142,7 +145,7 @@ class CardScannerCameraActivity : AppCompatActivity() {
       cameraProvider?.unbind(analysisUseCase)
     }
     textRecognizer?.close()
-    textRecognizer = TextRecognition.getClient()
+    textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
 
     // debugLog("card scanner options : $cardScannerOptions", cardScannerOptions)
     val analysisUseCase = ImageAnalysis.Builder().build()
@@ -184,6 +187,7 @@ class CardScannerCameraActivity : AppCompatActivity() {
     textRecognizer?.close()
   }
 
+  @Deprecated("Deprecated in Java")
   override fun onBackPressed() {
     setResult(Activity.RESULT_CANCELED)
     super.onBackPressed()

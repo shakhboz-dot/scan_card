@@ -1,6 +1,6 @@
-name: card_scanner
+name: card_scanner_mine
 description: Credit card scanner for Flutter.
-version: 1.0.3
+version: 1.0.4
 homepage: https://example-pet-store.com/newtify
 
 environment:

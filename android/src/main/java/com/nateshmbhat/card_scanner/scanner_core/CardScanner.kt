@@ -2,10 +2,13 @@ package com.nateshmbhat.card_scanner.scanner_core
 
 import android.annotation.SuppressLint
 import android.os.CountDownTimer
+import androidx.annotation.OptIn
+import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import com.nateshmbhat.card_scanner.SingleFrameCardScanner
 import com.nateshmbhat.card_scanner.logger.debugLog
 import com.nateshmbhat.card_scanner.onCardScanFailed
@@ -44,13 +47,13 @@ class CardScanner(private val scannerOptions: CardScannerOptions, private val on
     private val TAG: String = "TextRecognitionProcess"
   }
 
-  @SuppressLint("UnsafeExperimentalUsageError")
+  @OptIn(ExperimentalGetImage::class) @SuppressLint("UnsafeExperimentalUsageError")
   override fun analyze(imageProxy: ImageProxy) {
     val mediaImage = imageProxy.image
     if (mediaImage != null) {
       val image = InputImage.fromMediaImage(mediaImage, 90)
 
-      val recognizer = TextRecognition.getClient()
+      val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
 
       val result = recognizer.process(image)
               .addOnSuccessListener { visionText ->
